@@ -1,5 +1,7 @@
 # Hyper Transmit
 
+[![.NET](https://github.com/JupiterKwan/Hyper_Transmit/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JupiterKwan/Hyper_Transmit/actions/workflows/dotnet.yml)
+
 一款基于 WinUI 3 的现代 Windows SSH/SFTP 文件传输客户端，采用 MVVM 架构，提供直观的双窗格文件浏览器和高效的传输队列管理。
 
 ## ✨ 功能特性
