@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Hyper_Transmit.TransferQueuePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Grid RowDefinitions="Auto,*,Auto">
+        <!-- Top Bar: multi-select actions -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="4" Padding="12,8"
+                    x:Name="SelectionActionBar" Visibility="Collapsed">
+            <TextBlock x:Name="SelectionCountText" Text="已选: 0" VerticalAlignment="Center" 
+                       FontSize="13" FontWeight="SemiBold" Margin="0,0,12,0"/>
+            <Button Click="SelPauseButton_Click" Content="暂停"/>
+            <Button Click="SelResumeButton_Click" Content="恢复"/>
+            <Button Click="SelCancelButton_Click" Content="取消"/>
+            <Button Click="SelClearButton_Click" Content="移除"/>
+            <Button Click="SelectAllButton_Click" Content="全选" Margin="8,0,0,0"/>
+            <Button Click="ClearSelectionButton_Click" Content="取消选择"/>
+        </StackPanel>
+
+        <!-- Clear completed when no selection -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="4" Padding="12,8"
+                    x:Name="HintPanel">
+            <Button Click="ClearCompletedButton_Click" Content="清除已完成"/>
+        </StackPanel>
+
+        <!-- Transfer Items -->
+        <ScrollViewer Grid.Row="1" Padding="12,0" Tapped="ScrollViewer_Tapped">
+            <StackPanel x:Name="TransferItems" Spacing="8"/>
+        </ScrollViewer>
+
+        <!-- Bottom Summary (text only, no icons) -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Spacing="16" Padding="12,6"
+                    Background="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}">
+            <TextBlock x:Name="TotalCountText" Text="总计: 0" FontSize="12"
+                       Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+            <TextBlock x:Name="CompletedCountText" Text="已完成: 0" FontSize="12"
+                       Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+            <TextBlock x:Name="PendingCountText" Text="等待中: 0" FontSize="12"
+                       Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+            <TextBlock x:Name="FailedCountText" Text="失败: 0" FontSize="12"
+                       Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+        </StackPanel>
+    </Grid>
+</Page>

@@ -1,0 +1,31 @@
+{
+    "configurations": [
+        {
+            "name": "C#: Debug x64",
+            "type": "dotnet",
+            "request": "launch",
+            "projectPath": "${workspaceFolder}/Hyper Transmit.csproj",
+            "args": ["--property:Platform=x64", "--property:Configuration=Debug"]
+        },
+        {
+            "name": "C#: Debug ARM64",
+            "type": "dotnet",
+            "request": "launch",
+            "projectPath": "${workspaceFolder}/Hyper Transmit.csproj",
+            "args": ["--property:Platform=ARM64", "--property:Configuration=Debug"]
+        },
+        {
+            "name": "C#: Release x64",
+            "type": "dotnet",
+            "request": "launch",
+            "projectPath": "${workspaceFolder}/Hyper Transmit.csproj",
+            "args": ["--property:Platform=x64", "--property:Configuration=Release"]
+        },
+        {
+            "name": "C#: Release ARM64",
+            "type": "dotnet",
+            "request": "launch",
+            "projectPath": "${workspaceFolder}/Hyper Transmit.csproj",
+            "args": ["--property:Platform=ARM64", "--property:Configuration=Release"]
+        }
+    ]

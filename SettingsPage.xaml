@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Hyper_Transmit.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Hyper_Transmit"
+    xmlns:models="using:Hyper_Transmit.Models"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    NavigationCacheMode="Required">
+
+    <Grid ColumnDefinitions="200,*">
+        <!-- Settings Navigation -->
+        <ListView
+            Grid.Column="0"
+            x:Name="SettingsNav"
+            SelectionChanged="SettingsNav_SelectionChanged"
+            SelectionMode="Single"
+            Padding="8">
+            <ListViewItem Tag="General" IsSelected="True">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <FontIcon Glyph="&#xE713;" FontSize="16"/>
+                    <TextBlock Text="常规"/>
+                </StackPanel>
+            </ListViewItem>
+            <ListViewItem Tag="Transfer">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <FontIcon Glyph="&#xE898;" FontSize="16"/>
+                    <TextBlock Text="传输"/>
+                </StackPanel>
+            </ListViewItem>
+            <ListViewItem Tag="Appearance">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <FontIcon Glyph="&#xE771;" FontSize="16"/>
+                    <TextBlock Text="外观"/>
+                </StackPanel>
+            </ListViewItem>
+            <ListViewItem Tag="Logging">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <FontIcon Glyph="&#xE7BA;" FontSize="16"/>
+                    <TextBlock Text="日志"/>
+                </StackPanel>
+            </ListViewItem>
+        </ListView>
+
+        <!-- Settings Content -->
+        <ScrollViewer Grid.Column="1" Padding="20,8">
+            <StackPanel x:Name="ContentPanel">
+            <!-- General Settings -->
+            <StackPanel x:Name="GeneralPanel" Spacing="16" MaxWidth="500" Visibility="Visible">
+                <TextBlock Text="常规设置" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0,0,0,8"/>
+
+                <StackPanel Spacing="4">
+                    <TextBlock Text="并行传输数" FontSize="12" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                    <ComboBox x:Name="ConcurrentTransfersCombo" SelectedIndex="2" Width="120"
+                              SelectionChanged="ConcurrentTransfersCombo_SelectionChanged">
+                        <ComboBoxItem Content="1"/>
+                        <ComboBoxItem Content="2"/>
+                        <ComboBoxItem Content="3"/>
+                        <ComboBoxItem Content="5"/>
+                        <ComboBoxItem Content="10"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <ToggleSwitch
+                    x:Name="MinimizeToTraySwitch"
+                    Header="关闭时最小化到系统托盘"
+                    Toggled="Setting_Toggled"/>
+
+                <Button x:Name="ResetButton" Content="恢复默认设置" Click="ResetButton_Click" Margin="0,16,0,0"/>
+            </StackPanel>
+
+            <!-- Transfer Settings -->
+            <StackPanel x:Name="TransferPanel" Spacing="16" MaxWidth="500" Visibility="Collapsed">
+                <TextBlock Text="传输设置" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0,0,0,8"/>
+
+                <ToggleSwitch
+                    x:Name="RetryOnFailureSwitch"
+                    Header="传输失败时自动重试"
+                    Toggled="Setting_Toggled"/>
+
+                <StackPanel Spacing="4">
+                    <TextBlock Text="最大重试次数" FontSize="12" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                    <NumberBox x:Name="MaxRetriesBox" Value="3" Width="120" SpinButtonPlacementMode="Compact"
+                               ValueChanged="MaxRetriesBox_ValueChanged"/>
+                </StackPanel>
+
+                <StackPanel Spacing="4">
+                    <TextBlock Text="覆盖规则" FontSize="12" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                    <ComboBox x:Name="OverwriteActionCombo" SelectedIndex="0" Width="200"
+                              SelectionChanged="OverwriteActionCombo_SelectionChanged">
+                        <ComboBoxItem Content="询问"/>
+                        <ComboBoxItem Content="覆盖"/>
+                        <ComboBoxItem Content="跳过"/>
+                        <ComboBoxItem Content="重命名"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <ToggleSwitch
+                    x:Name="SoundOnCompleteSwitch"
+                    Header="传输完成时播放提示音"
+                    Toggled="Setting_Toggled"/>
+
+                <ToggleSwitch
+                    x:Name="LogTransferHistorySwitch"
+                    Header="记录传输历史"
+                    Toggled="Setting_Toggled"/>
+            </StackPanel>
+
+            <!-- Appearance Settings -->
+            <StackPanel x:Name="AppearancePanel" Spacing="16" MaxWidth="500" Visibility="Collapsed">
+                <TextBlock Text="外观设置" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0,0,0,8"/>
+
+                <StackPanel Spacing="4">
+                    <TextBlock Text="主题" FontSize="12" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                    <ComboBox x:Name="ThemeCombo" SelectedIndex="0" Width="200"
+                              SelectionChanged="ThemeCombo_SelectionChanged">
+                        <ComboBoxItem Content="跟随系统"/>
+                        <ComboBoxItem Content="浅色"/>
+                        <ComboBoxItem Content="深色"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <ToggleSwitch
+                    x:Name="ShowHiddenFilesSwitch"
+                    Header="显示隐藏文件"
+                    Toggled="Setting_Toggled"/>
+
+                <StackPanel Spacing="4">
+                    <TextBlock Text="日期格式" FontSize="12" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                    <ComboBox x:Name="DateFormatCombo" SelectedIndex="0" Width="200"
+                              SelectionChanged="DateFormatCombo_SelectionChanged">
+                        <ComboBoxItem Content="yyyy-MM-dd HH:mm"/>
+                        <ComboBoxItem Content="dd/MM/yyyy HH:mm"/>
+                        <ComboBoxItem Content="MM/dd/yyyy hh:mm tt"/>
+                        <ComboBoxItem Content="yyyy年MM月dd日 HH:mm"/>
+                    </ComboBox>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Logging Settings -->
+            <StackPanel x:Name="LoggingPanel" Spacing="16" MaxWidth="500" Visibility="Collapsed">
+                <TextBlock Text="日志设置" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0,0,0,8"/>
+
+                <ToggleSwitch
+                    x:Name="EnableLoggingSwitch"
+                    Header="启用日志记录"
+                    Toggled="Setting_Toggled"/>
+
+                <StackPanel Spacing="4">
+                    <TextBlock Text="日志级别" FontSize="12" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                    <ComboBox x:Name="LogLevelCombo" SelectedIndex="1" Width="200"
+                              SelectionChanged="LogLevelCombo_SelectionChanged">
+                        <ComboBoxItem Content="Verbose"/>
+                        <ComboBoxItem Content="Debug"/>
+                        <ComboBoxItem Content="Information"/>
+                        <ComboBoxItem Content="Warning"/>
+                        <ComboBoxItem Content="Error"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <TextBlock
+                    Text="日志文件位置:"
+                    FontSize="12"
+                    Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                <TextBlock
+                    x:Name="LogPathText"
+                    FontSize="11"
+                    Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                    TextWrapping="Wrap"
+                    IsTextSelectionEnabled="True"/>
+
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <Button Content="打开日志文件夹" Click="OpenLogFolder_Click"/>
+                    <Button Content="清除日志" Click="ClearLog_Click"/>
+                </StackPanel>
+            </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

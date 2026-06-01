@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Hyper Transmit (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Hyper Transmit (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
